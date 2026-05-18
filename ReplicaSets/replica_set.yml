@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: devnginxreplicaset
+  labels:
+    app: testapp
+    environment: dev
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - {key: environment, operator: In, values: [dev]}
+      - {key: techstack, operator: NotIn, values: [alpine]}
+  template:
+    metadata:
+      labels:
+        app: testapp
+        environment: dev
+    spec:
+      containers:
+        - name: nginxreplicasetpod
+          image: nginx
+          ports:
+            - containerPort: 80
