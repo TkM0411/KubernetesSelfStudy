@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: service-dns-test-pod
+  namespace: service-namespace
+spec:
+  containers:
+    - name: alpinecontainer
+      image: alpine
+      command:
+        - sleep
+        - '3600'
