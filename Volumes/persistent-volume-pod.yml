@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: persistent-volume-pod
+spec:
+  restartPolicy: Never
+  containers:
+    - name: busybox-container
+      image: busybox
+      command: ["sh", "-c", "ls -la > /output/directorylisting.txt"]
+      volumeMounts:
+        - name: pv
+          mountPath: /output
+  volumes:
+    - name: pv
+      persistentVolumeClaim:
+        claimName: local-pv-claim
